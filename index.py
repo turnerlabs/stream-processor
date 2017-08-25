@@ -41,7 +41,7 @@ def process_stream(stream, name, fps, skip):
     fps = 1 / float(fps)
     while True:
         length = player.get_length()
-        if length != 0 && length > count:
+        if length != 0 and length > count:
             if length <= count + 1:
                 print("Completed")
                 sys.exit(0)
