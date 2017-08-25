@@ -1,0 +1,11 @@
+version: "2"
+services:
+  batch-rekognizer:
+    image: stream
+    tty: true
+    volumes:
+    - /tmp/:/tmp/
+    environment:
+      STREAM: "${STREAM}"
+      NAME: "${NAME}"
+      FPS: ${FPS}
