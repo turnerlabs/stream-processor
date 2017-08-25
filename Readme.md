@@ -9,6 +9,8 @@
 
 ### example
 ```
+docker build -t stream.core -f Dockerfile.core .
+docker build -t stream .
 export STREAM="https://www.youtube.com/watch?v=9U11PrzB4t0"
 export NAME="santa_1"
 export FPS="2"

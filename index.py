@@ -3,8 +3,21 @@ import time
 import os
 import sys
 
+def timing(f):
+    def wrap(*args):
+        time1 = time.time()
+        ret = f(*args)
+        time2 = time.time()
+        print '++++++++++++++++++++ TIMING ++++++++++++++++++++++++++++++++++++'
+        print ''
+        print '%s function took %0.3f m' % (f.func_name, ((time2-time1)/60))
+        print ''
+        print '++++++++++++++++++++ TIMING ++++++++++++++++++++++++++++++++++++'
+        return ret
+    return wrap
 
-def process_stream(stream, name="snaps", fps=1, skip=0):
+@timing
+def process_stream(stream, name, fps, skip):
 
     instance = vlc.Instance()
 
@@ -34,11 +47,15 @@ def process_stream(stream, name="snaps", fps=1, skip=0):
                 sys.exit(0)
 
             time.sleep(fps + skip)
-            count += float(fps)
+            # current_time = float(player.get_time())
+            # count = int(current_time + (1000 * (fps + skip)))
+            # player.set_time(count)
             #position = (player.get_length() - count) / float(player.get_length())
             #print('length:', player.get_length(), position)
             #player.set_position(position)
-            snap_name = '/tmp/' + name + '/' + str(count) + '_snap.png'
+            current_time = float(player.get_time())
+            count = current_time
+            snap_name = '/tmp/' + name + '/' + str(float(count/1000)) + '_snap.png'
             out = player.video_take_snapshot(0, snap_name, 0, 0)
         elif loading == 30:
             print("Waited 30 seconds for Video to Load")
@@ -48,12 +65,11 @@ def process_stream(stream, name="snaps", fps=1, skip=0):
             time.sleep(1)
             print("Loading...")
 
-
 if __name__ == '__main__':
     stream = os.environ.get('STREAM', False)
-    name = os.environ.get('NAME', None)
+    name = os.environ.get('NAME', "snaps")
     fps = int(os.environ.get('FPS', 1))
-    skip = int(os.environ.get('SKIP', 1))
+    skip = int(os.environ.get('SKIP', 0))
 
     if stream == False:
         print("Must Provide ${STREAM}")

@@ -1,7 +1,7 @@
 version: "2"
 services:
   batch-rekognizer:
-    image: stream
+    image: turnerlabs/stream
     tty: true
     volumes:
     - /tmp/:/tmp/
