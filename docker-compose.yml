@@ -3,9 +3,13 @@ services:
   batch-rekognizer:
     image: turnerlabs/stream
     tty: true
+    ports:
+    - 8080:8080
     volumes:
     - /tmp/:/tmp/
     environment:
       STREAM: "${STREAM}"
       NAME: "${NAME}"
       FPS: ${FPS}
+      SKIP: ${SKIP}
+      OPTIONS: "${OPTIONS}"

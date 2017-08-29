@@ -9,12 +9,10 @@
 
 ### example
 ```
-docker build -t stream.core -f Dockerfile.core .
-docker build -t stream .
-export STREAM="https://www.youtube.com/watch?v=9U11PrzB4t0"
+export STREAM="https://www.youtube.com/watch?v=bgFSSPlzBl4"
 export NAME="santa_1"
 export FPS="2"
-export SKIP="1"
+export SKIP="0"
 docker-compose up
 ```
 

@@ -15,9 +15,11 @@ LABEL maintainer "Jessie Frazelle <jess@linux.com>"
 RUN apt-get update && apt-get install -y \
     libgl1-mesa-dri \
     libgl1-mesa-glx \
-    vlc-nox \
+    vlc \
     python-pip \
     python-setuptools \
+    libncurses5-dev \
+    libncursesw5-dev \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
